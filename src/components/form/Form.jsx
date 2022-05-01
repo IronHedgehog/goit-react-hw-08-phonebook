@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import actions from '../../redux/phonebook/phonebook-actions';
 import { getContacts } from '../../redux/phonebook/phonebook-selector';
+import { addContact } from '../../redux/phonebook/phonebook-operation';
 
 const Form = () => {
   const contacts = useSelector(getContacts);
@@ -35,7 +35,11 @@ const Form = () => {
       // eslint-disable-next-line no-useless-concat
       alert(`${name}` + ' is already in contacts');
     } else {
-      dispatch(actions.addContact(name, number));
+      const contact = {
+        name,
+        number,
+      };
+      dispatch(addContact(contact));
     }
     setName('');
     setNumber('');
