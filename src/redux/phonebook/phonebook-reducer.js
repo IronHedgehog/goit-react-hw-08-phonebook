@@ -13,7 +13,7 @@ const test = [
   { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
 ];
 
-const contacts = createReducer([], {
+const contacts = createReducer(test, {
   [buildContacts.fulfilled]: (_, { payload }) => payload,
   [addContact.fulfilled]: (state, { payload }) => [...state, payload],
   [deleteContacts.fulfilled]: (state, { payload }) =>

@@ -4,11 +4,12 @@ import { getContacts } from '../../redux/phonebook/phonebook-selector';
 import { addContact } from '../../redux/phonebook/phonebook-operation';
 
 const Form = () => {
+  const dispatch = useDispatch();
   const contacts = useSelector(getContacts);
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const handleChange = e => {
     const { name, value } = e.target;
 

@@ -1,26 +1,38 @@
 import { useEffect } from 'react';
 import './App.css';
-import ContactList from './components/contactList/ContactList';
-import Filter from './components/Filter/Filter';
-import Form from './components/form/Form';
 import { getContacts } from './redux/phonebook/phonebook-selector';
-import { useDispatch, useSelector } from 'react-redux';
-import { buildContacts } from './redux/phonebook/phonebook-operation';
+import PhoneBookPage from './views/phonebook';
+import LoginPage from './views/login';
+import RegistrationPage from './views/registration';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import Header from './components/header/header';
+import { refreshedUser } from './redux/auth/auth-operation';
+import { useDispatch } from 'react-redux';
 
 const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(buildContacts());
+    dispatch(refreshedUser());
   }, [dispatch]);
 
   return (
     <>
-      <h1>Phonebook</h1>
-      <Form />
-      <h2>Contacts</h2>
-      <Filter />
-      <ContactList />
+      <Header />
+
+      <Switch>
+        <Route path="/" exact>
+          <LoginPage />
+        </Route>
+
+        <Route path="/registration">
+          <RegistrationPage />
+        </Route>
+
+        <Route path="/contacts">
+          <PhoneBookPage />
+        </Route>
+      </Switch>
     </>
   );
 };
