@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import './App.css';
-import { getContacts } from './redux/phonebook/phonebook-selector';
 import PhoneBookPage from './views/phonebook';
 import LoginPage from './views/login';
 import RegistrationPage from './views/registration';
@@ -15,7 +14,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import PrivateRoute from './utils/CustomRoutes/private';
 import PublicRoute from './utils/CustomRoutes/public';
 import { Skeleton } from '@mui/material';
-
 
 const App = () => {
   const dispatch = useDispatch();
