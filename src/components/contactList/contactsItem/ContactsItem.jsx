@@ -1,35 +1,26 @@
-import PropTypes from 'prop-types';
-import {
-  getVisibleContacts,
-  getIsLoading,
-} from '../../../redux/phonebook/phonebook-selector';
+import { getIsLoading } from '../../../redux/phonebook/phonebook-selector';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteContacts } from '../../../redux/phonebook/phonebook-operation';
+import { ThreeDots } from 'react-loader-spinner';
 
-const ContactItem = () => {
-  const loader = useSelector(getIsLoading);
-  const contacts = useSelector(getVisibleContacts);
+const ContactItem = ({ id, name, number }) => {
+  const isLoading = useSelector(getIsLoading);
+
   const dispatch = useDispatch();
   return (
-    <>
-      {contacts.length
-        ? contacts.map(({ id, name, number }) => {
-            return (
-              <li key={id}>
-                <p name={name}>
-                  {name}: {number}
-                </p>
-                <button
-                  type="button"
-                  onClick={() => dispatch(deleteContacts(id))}
-                >
-                  {loader ? <p>Loading</p> : 'Delete'}
-                </button>
-              </li>
-            );
-          })
-        : null}
-    </>
+    <li>
+      <p name={name}>
+        {name}: {number}
+      </p>
+      <button onClick={() => dispatch(deleteContacts(id))} disabled={isLoading}>
+        {isLoading ? (
+          <ThreeDots color="#ff0000" height={20} width={20} />
+        ) : (
+          'Delete'
+        )}
+      </button>
+    </li>
   );
 };
+
 export default ContactItem;

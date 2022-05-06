@@ -1,3 +1,4 @@
+import s from './form.module.css';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getContacts } from '../../redux/phonebook/phonebook-selector';
@@ -47,10 +48,11 @@ const Form = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className={s.form} onSubmit={handleSubmit}>
       <label>
         <span>Name</span>
         <input
+          className={s.input}
           type="text"
           name="name"
           value={name}
@@ -65,6 +67,7 @@ const Form = () => {
       <label>
         <span>Phone</span>
         <input
+          className={s.input}
           type="tel"
           name="number"
           value={number}
@@ -76,7 +79,7 @@ const Form = () => {
         />
       </label>
       <br />
-      <button type="submit">addContact</button>
+      <button className={s.button} type="submit">addContact</button>
     </form>
   );
 };

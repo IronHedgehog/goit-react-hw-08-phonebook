@@ -7,15 +7,21 @@ import RegistrationPage from './views/registration';
 import { Switch } from 'react-router-dom';
 import Header from './components/header/header';
 import { refreshedUser } from './redux/auth/auth-operation';
-import { getIsFetchingCurrent } from './redux/auth/auth-selectors';
+import {
+  getIsFetchingCurrent,
+  getIsLoggedIn,
+} from './redux/auth/auth-selectors';
 import { useDispatch, useSelector } from 'react-redux';
 import PrivateRoute from './utils/CustomRoutes/private';
 import PublicRoute from './utils/CustomRoutes/public';
 import { Skeleton } from '@mui/material';
 
+
 const App = () => {
   const dispatch = useDispatch();
   const loadingCurrentUser = useSelector(getIsFetchingCurrent);
+
+  const loggedIn = useSelector(getIsLoggedIn);
 
   useEffect(() => {
     dispatch(refreshedUser());
@@ -27,7 +33,7 @@ const App = () => {
         <Skeleton variant="rectangular" width={210} height={118} />
       ) : (
         <>
-          <Header />
+          {loggedIn && <Header />}
           <Switch>
             <PublicRoute path="/" redirectTo="/contacts" exact restricted>
               <LoginPage />
